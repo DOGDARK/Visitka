@@ -4,6 +4,7 @@ from typing import AsyncGenerator
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from backend.api.core.db_init import close_orm, init_orm
 from backend.api.core.exception_handler import http_exception_handler
@@ -27,6 +28,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
 app = FastAPI(lifespan=lifespan)
 app.include_router(users_router)
 app.add_exception_handler(HTTPException, http_exception_handler)
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"])
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ from typing import Any
 from urllib.parse import parse_qs, unquote
 
 from fastapi import HTTPException
+from sqlalchemy.exc import IntegrityError
 
 from backend.api.users.repo import Repo
 from backend.api.users.schemas import UserRequest, UserResponse
@@ -19,7 +20,10 @@ class Service:
         if not tg_user_id:
             raise HTTPException(status_code=400, detail="tg_user_id not found")
         data["tg_user_id"] = tg_user_id
-        user = await self._repo.save_user(data)
+        try:
+            user = await self._repo.save_user(data)
+        except IntegrityError:
+            raise HTTPException(status_code=400, detail="User already exists")
         return UserResponse.model_validate(user, from_attributes=True)
 
     async def get_user_by_tg_id(self, tg_user_id: int) -> UserResponse | None:
@@ -33,7 +37,7 @@ class Service:
         result = {}
 
         for key, values in parsed.items():
-            value = values[0]  
+            value = values[0]
 
             if key == "user":
                 result[key] = json.loads(unquote(value))

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="stylesheet" href="styles.css" />
+<title>Mini App</title>
+</head>
+<body>
+
+<!-- Нижнее меню -->
+<div class="nav">
+    <div class="nav-item" onclick="openPage('screen1')">🏠</div>
+    <div class="nav-item" onclick="openPage('screen2')">📝</div>
+</div>
+
+<!-- Главная страница -->
+<div id="screen1" class="page active">
+    <div style="text-align:center; margin-top:40px;">
+        <h1 id="companyName">Название</h1>
+        <p id="companyDesc">Описание</p>
+    </div>
+
+    <div class="news-block">
+        <h2>Новости</h2>
+        <div class="news-card">
+            <h3>Заголовок новости 1</h3>
+            <p>Краткое описание новости</p>
+        </div>
+        <div class="news-card">
+            <h3>Заголовок новости 2</h3>
+            <p>Краткое описание новости</p>
+        </div>
+    </div>
+</div>
+
+<!-- Страница отправки заказа -->
+<div id="screen2" class="page">
+    <h1>Отправить заказ</h1>
+    <div class="form">
+        <input id="name" type="text" placeholder="Ваше имя" />
+        <input id="username" type="text" placeholder="Ваш Telegram @username" />
+        <textarea id="description" placeholder="Описание заказа"></textarea>
+        <div class="btn" onclick="sendOrder()">Отправить</div>
+    </div>
+</div>
+
+<script>
+/* Переключение страниц */
+function openPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+}
+
+/* Всплывающее уведомление */
+function showMessage(msg, duration = 3000) {
+    const div = document.createElement("div");
+    div.className = "message";
+    div.textContent = msg;
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), duration);
+}
+
+/* Отправка формы */
+function sendOrder() {
+    // const initData = Telegram.WebApp.initData;
+    const initData = "user={\"id\":1212333}&auth_date=1234567890";
+    // const user = Telegram.WebApp.initDataUnsafe.user || {};
+
+    const name = document.getElementById("name").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const description = document.getElementById("description").value.trim();
+
+    if (!name || !description) {
+        showMessage("Пожалуйста, заполните все обязательные поля");
+        return;
+    }
+
+    const payload = {
+        init_data: initData,
+        first_name: name || null,
+        last_name: username || null
+        // form_name: name,
+        // form_username: username,
+        // form_description: description
+    };
+
+    fetch("http://0.0.0.0:8000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Ошибка сети");
+        return response.json();
+    })
+    .then(data => {
+        showMessage("Заявка отправлена!");
+        document.getElementById("name").value = "";
+        document.getElementById("username").value = "";
+        document.getElementById("description").value = "";
+    })
+    .catch(error => {
+        console.error(error);
+        showMessage("Ошибка при отправке!");
+    });
+}
+
+// Инициализация первой страницы
+document.getElementById('screen1').classList.add('active');
+</script>
+
+</body>
+</html>
