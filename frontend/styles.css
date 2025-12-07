@@ -90,27 +90,243 @@ textarea {
     cursor: pointer;
 }
 
-/* Уведомления */
+/* Уведомления (улучшенные) */
 .message {
     position: fixed;
-    bottom: 20px;
     left: 50%;
+    bottom: -60px; /* Начинает ниже экрана */
     transform: translateX(-50%);
-    background: #0088cc;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
+    background: var(--tg-theme-button-color, #31055a);
+    color: var(--tg-theme-button-text-color, #fff);
+    padding: 12px 22px;
+    border-radius: 12px;
     font-size: 16px;
-    z-index: 1000;
-    animation: fadein 0.3s, fadeout 0.3s 2.7s;
+    font-weight: bold;
+    z-index: 2000;
+    opacity: 0;
+    animation: slideUp 0.3s forwards, slideDown 0.3s forwards 2.7s;
 }
 
-@keyframes fadein {
-    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+@keyframes slideUp {
+    from {
+        bottom: -50px;
+        opacity: 0;
+    }
+    to {
+        bottom: 25px;
+        opacity: 1;
+    }
 }
 
-@keyframes fadeout {
-    from { opacity: 1; transform: translateX(-50%) translateY(0); }
-    to { opacity: 0; transform: translateX(-50%) translateY(20px); }
+@keyframes slideDown {
+    from {
+        bottom: 25px;
+        opacity: 1;
+    }
+    to {
+        bottom: -50px;
+        opacity: 0;
+    }
+}
+
+
+
+/* ============================= */
+/*        ВСПЛЫВАЮЩЕЕ ОКНО       */
+/* ============================= */
+
+/* Модалка скрыта по умолчанию */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 20px;
+}
+
+/* Показываем, когда добавлен .active */
+.modal.active {
+    display: flex;
+}
+
+/* Контент внутри окна */
+.modal-content {
+    background: var(--tg-theme-bg-color, #0f0b14);
+    color: var(--tg-theme-text-color, #e8d9ff);
+    padding: 20px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    animation: popup 0.25s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Анимация появления */
+@keyframes popup {
+    0% { transform: scale(0.85); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Крестик закрытия */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* по твоему запросу — слева */
+    font-size: 22px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--tg-theme-button-color, #b67bff);
+}
+
+/* Заголовок внутри окна */
+.modal-content h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--tg-theme-button-color, #b67bff);
+}
+
+/* Описание тарифа */
+.modal-content p {
+    margin-bottom: 20px;
+    opacity: 0.85;
+    font-size: 15px;
+    text-align: center;
+}
+
+/* Блок доп. опций */
+.extra-options {
+    background: var(--tg-theme-secondary-bg-color, #1a1125);
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.extra-options h3 {
+    margin: 0 0 10px 0;
+    color: var(--tg-theme-button-color, #b67bff);
+}
+
+
+/* ============================= */
+/*          БЛОК ТАРИФОВ         */
+/* ============================= */
+
+.tariffs-block {
+    margin-top: 40px;
+}
+
+.tariff-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--tg-theme-button-color, #b67bff);
+}
+
+.tariff-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Карточка тарифа */
+.tariff-card {
+    background: linear-gradient(135deg,
+        rgba(182, 123, 255, 0.12),
+        rgba(88, 0, 150, 0.12)
+    );
+    border: 1px solid rgba(182, 123, 255, 0.25);
+    padding: 18px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+}
+
+/* Наведение */
+.tariff-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 18px rgba(182, 123, 255, 0.25);
+    border-color: rgba(182, 123, 255, 0.45);
+}
+
+/* Верхняя строка */
+.tariff-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Название тарифа */
+.tariff-card h3 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--tg-theme-button-color, #b67bff);
+}
+
+/* Цена */
+.price {
+    background: rgba(182, 123, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: var(--tg-theme-text-color, #e8d9ff);
+    border: 1px solid rgba(182, 123, 255, 0.3);
+}
+
+/* Описание */
+.tariff-card p {
+    margin-top: 10px;
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+/* Чекбокс-опции */
+.option-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.option-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+/* Блок поля количества */
+.pages-input {
+    margin-top: 10px;
+}
+
+.pages-input.hidden {
+    display: none;
+}
+
+.pages-input input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: var(--tg-theme-secondary-bg-color, #1a1125);
+    color: var(--tg-theme-text-color, #e8d9ff);
+}
+
+.price-display {
+    margin-top: 10px;
+    padding: 12px;
+    background: rgba(182, 123, 255, 0.12);
+    border: 1px solid rgba(182, 123, 255, 0.3);
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--tg-theme-button-color, #b67bff);
 }

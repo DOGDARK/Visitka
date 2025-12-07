@@ -19,5 +19,11 @@ class Order(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    text: Mapped[str] = mapped_column(String(128), nullable=False)
+    description: Mapped[str] = mapped_column(String(128), nullable=True)
+    tariff: Mapped[str] = mapped_column(String(128), nullable=False)
+    db: Mapped[bool] = mapped_column(bool, default=False)
+    payment: Mapped[bool] = mapped_column(bool, default=False)
+    pagesEnabled: Mapped[bool] = mapped_column(bool, default=False)
+    pagesCount: Mapped[int] = mapped_column(Integer, nullable=True)
+    finalPrice: Mapped[int] = mapped_column(Integer, nullable=False)
     order_status: Mapped[OrderStatus] = mapped_column(Enum(OrderStatus), nullable=False, default=OrderStatus.NEW)

@@ -4,16 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="/Users/matvey/programming/html/style.css" />
 <title>Mini App</title>
 </head>
 <body>
-
-<!-- Нижнее меню -->
-<div class="nav">
-    <div class="nav-item" onclick="openPage('screen1')">🏠</div>
-    <div class="nav-item" onclick="openPage('screen2')">📝</div>
-</div>
 
 <!-- Главная страница -->
 <div id="screen1" class="page active">
@@ -22,35 +16,111 @@
         <p id="companyDesc">Описание</p>
     </div>
 
-    <div class="news-block">
-        <h2>Новости</h2>
-        <div class="news-card">
-            <h3>Заголовок новости 1</h3>
-            <p>Краткое описание новости</p>
-        </div>
-        <div class="news-card">
-            <h3>Заголовок новости 2</h3>
-            <p>Краткое описание новости</p>
+    <!-- Блок тарифов -->
+    <div class="tariffs-block">
+        <h2 class="tariff-title">Тарифы</h2>
+
+        <div class="tariff-list">
+
+            <div class="tariff-card"
+                onclick="openTariff('Тариф 1', 'Описание тарифа 1', 10000)">
+                <div class="tariff-header">
+                    <h3>Тариф 1</h3>
+                    <span class="price">10 000 ₽</span>
+                </div>
+                <p>Краткое описание тарифа</p>
+            </div>
+
+            <div class="tariff-card"
+                onclick="openTariff('Тариф 2', 'Описание тарифа 2', 20000)">
+                <div class="tariff-header">
+                    <h3>Тариф 2</h3>
+                    <span class="price">20 000 ₽</span>
+                </div>
+                <p>Краткое описание тарифа</p>
+            </div>
+
+            <div class="tariff-card"
+                onclick="openTariff('Тариф 3', 'Описание тарифа 3', 30000)">
+                <div class="tariff-header">
+                    <h3>Тариф 3</h3>
+                    <span class="price">30 000 ₽</span>
+                </div>
+                <p>Краткое описание тарифа</p>
+            </div>
+
         </div>
     </div>
+
+
 </div>
 
-<!-- Страница отправки заказа -->
-<div id="screen2" class="page">
-    <h1>Отправить заказ</h1>
-    <div class="form">
-        <input id="name" type="text" placeholder="Ваше имя" />
-        <input id="username" type="text" placeholder="Ваш Telegram @username" />
-        <textarea id="description" placeholder="Описание заказа"></textarea>
-        <div class="btn" onclick="sendOrder()">Отправить</div>
+<!-- Модальное окно тарифа -->
+<div id="tariffModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-close" onclick="closeTariffModal()">✖</div>
+
+        <h2 id="modalTitle">Тариф</h2>
+        <p id="modalDesc">Описание тарифа</p>
+
+        <!-- Форма -->
+        <div class="form">
+            <input id="name" type="text" placeholder="Ваше имя" />
+            <input id="username" type="text" placeholder="Ваш Telegram @username" />
+            <textarea id="description" placeholder="Описание заказа"></textarea>
+
+            <!-- Доп опции -->
+            <div class="extra-options">
+                <h3>Дополнительные опции</h3>
+
+                <label class="option-item">
+                    <input type="checkbox" id="opt_db" onchange="updatePrice()">
+                    <span>База данных</span>
+                </label>
+
+                <label class="option-item">
+                    <input type="checkbox" id="opt_payment" onchange="updatePrice()">
+                    <span>Проверка оплаты</span>
+                </label>
+
+                <label class="option-item">
+                    <input type="checkbox" id="opt_pages" onchange="togglePagesInput(); updatePrice()">
+                    <span>Дополнительные страницы</span>
+                </label>
+
+                <!-- Появляющееся поле -->
+                <div id="pagesCountBlock" class="pages-input hidden">
+                    <input type="number" id="pagesCount" placeholder="Количество страниц" min="1" oninput="updatePrice()">
+                </div>
+            </div>
+
+            <div id="priceDisplay" class="price-display">Цена: 0 ₽</div>
+
+            <div class="btn" onclick="sendOrder()">Отправить</div>
+        </div>
     </div>
 </div>
 
 <script>
-/* Переключение страниц */
-function openPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
+/* Открытие модального окна */
+let selectedTariffPrice = 0;
+let orderSent = false;
+
+function openTariff(title, desc, price) {
+    document.getElementById("modalTitle").textContent = title;
+    document.getElementById("modalDesc").textContent = desc;
+
+    selectedTariffPrice = price;
+
+    document.getElementById("tariffModal").classList.add("active");
+
+    updatePrice();
+}
+
+
+/* Закрытие модального окна */
+function closeModal() {
+    document.getElementById("tariffModal").classList.remove("active");
 }
 
 /* Всплывающее уведомление */
@@ -63,33 +133,102 @@ function showMessage(msg, duration = 3000) {
 }
 
 /* Отправка формы */
-function sendOrder() {
-    // const initData = Telegram.WebApp.initData;
-    const initData = "user={\"id\":1212333}&auth_date=1234567890";
-    // const user = Telegram.WebApp.initDataUnsafe.user || {};
+// function sendOrder() {
+//     const initData = "user={\"id\":1212333}&auth_date=1234567890";
 
+//     const name = document.getElementById("name").value.trim();
+//     const username = document.getElementById("username").value.trim();
+//     const description = document.getElementById("description").value.trim();
+
+//     if (!name || !description) {
+//         showMessage("Пожалуйста, заполните все обязательные поля");
+//         return;
+//     }
+
+//     const payload = {
+//         init_data: initData,
+//         first_name: name || null,
+//         last_name: username || null
+//     };
+
+//     fetch("http://0.0.0.0:8000/users", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(payload)
+//     })
+//     .then(response => {
+//         if (!response.ok) throw new Error("Ошибка сети");
+//         return response.json();
+//     })
+//     .then(data => {
+//         showMessage("Заявка отправлена!");
+//         document.getElementById("name").value = "";
+//         document.getElementById("username").value = "";
+//         document.getElementById("description").value = "";
+//         closeModal();
+//     })
+//     .catch(error => {
+//         console.error(error);
+//         showMessage("Ошибка при отправке!");
+//     });
+// }
+
+function sendOrder() {
     const name = document.getElementById("name").value.trim();
     const username = document.getElementById("username").value.trim();
-    const description = document.getElementById("description").value.trim();
+    const desc = document.getElementById("description").value.trim();
+
+    const db = document.getElementById("opt_db").checked;
+    const payment = document.getElementById("opt_payment").checked;
+    const pagesEnabled = document.getElementById("opt_pages").checked;
+    const pagesCount = pagesEnabled ? (parseInt(document.getElementById("pagesCount").value) || 0) : 0;
+
+    const finalPriceText = document.getElementById("priceDisplay").textContent;
+    const finalPrice = parseInt(finalPriceText.replace(/\D/g, ""));
+
+    const initData = "user={\"id\":1212333}&auth_date=1234567890";
+    // const initData = window.Telegram.WebApp.initData || "";
+
+    const tariff = document.getElementById("modalTitle").textContent;
 
     if (!name || !description) {
-        showMessage("Пожалуйста, заполните все обязательные поля");
-        return;
-    }
+    showMessage("Пожалуйста, заполните все обязательные поля");
+    return;
+    };
 
-    const payload = {
+    const payload_user = {
         init_data: initData,
         first_name: name || null,
         last_name: username || null
-        // form_name: name,
-        // form_username: username,
-        // form_description: description
     };
 
     fetch("http://0.0.0.0:8000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload_user)
+    })
+    .then(res => res.json())
+    .then(data => console.log("Данные отправлены:", data))
+    .catch(err => console.error("Ошибка отправки данных:", err));
+
+    const payload_order = {
+        desc,
+        tariff,
+        db,
+        payment,
+        pagesEnabled,
+        pagesCount,
+        finalPrice,
+        initData
+    };
+
+    console.log("Отправка:", payload_order);
+
+    // отправляем в бэк
+    fetch("http://0.0.0.0:8000/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload_order)
     })
     .then(response => {
         if (!response.ok) throw new Error("Ошибка сети");
@@ -97,9 +236,10 @@ function sendOrder() {
     })
     .then(data => {
         showMessage("Заявка отправлена!");
-        document.getElementById("name").value = "";
-        document.getElementById("username").value = "";
-        document.getElementById("description").value = "";
+
+        orderSent = true; 
+        closeTariffModal();
+        resetForm();
     })
     .catch(error => {
         console.error(error);
@@ -107,8 +247,143 @@ function sendOrder() {
     });
 }
 
-// Инициализация первой страницы
-document.getElementById('screen1').classList.add('active');
+
+function closeTariffModal() {
+    const name = document.getElementById("name").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const desc = document.getElementById("description").value.trim();
+
+    const db = document.getElementById("opt_db").checked;
+    const payment = document.getElementById("opt_payment").checked;
+    const pagesEnabled = document.getElementById("opt_pages").checked;
+    const pagesCount = pagesEnabled ? (parseInt(document.getElementById("pagesCount").value) || 0) : 0;
+
+    const finalPriceText = document.getElementById("priceDisplay").textContent;
+    const finalPrice = parseInt(finalPriceText.replace(/\D/g, ""));
+
+    // initData от Telegram WebApp
+    const initData = "user={\"id\":1212333}&auth_date=1234567890";
+    // const initData = window.Telegram.WebApp.initData || "";
+
+    const tariff = document.getElementById("modalTitle").textContent;
+
+    document.getElementById("tariffModal").classList.remove("active");
+    resetForm();
+
+    // Отправка только если заказ ещё не был отправлен
+    if (!orderSent && (db || payment || pagesEnabled || name || username || desc)) {
+        const payload_user = {
+        init_data: initData,
+        first_name: name || null,
+        last_name: username || null
+        };
+
+        fetch("http://0.0.0.0:8000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload_user)
+        })
+        .then(res => res.json())
+        .then(data => console.log("Данные отправлены:", data))
+        .catch(err => console.error("Ошибка отправки данных:", err));
+
+
+        const payload_order = {
+            desc,
+            tariff,
+            db,
+            payment,
+            pagesEnabled,
+            pagesCount,
+            finalPrice,
+            initData
+        };
+
+        fetch("http://0.0.0.0:8000/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload_order)
+        })
+        .then(res => res.json())
+        .then(data => console.log("Данные отправлены:", data))
+        .catch(err => console.error("Ошибка отправки данных:", err));
+    }
+
+    orderSent = false;
+}
+
+
+
+
+function resetForm() {
+    // Сброс текстовых полей
+    document.getElementById("name").value = "";
+    document.getElementById("username").value = "";
+    document.getElementById("description").value = "";
+
+    // Чекбоксы
+    document.getElementById("opt_db").checked = false;
+    document.getElementById("opt_payment").checked = false;
+    document.getElementById("opt_pages").checked = false;
+
+    // Доп страницы
+    document.getElementById("pagesCount").value = "";
+    document.getElementById("pagesCountBlock").classList.add("hidden");
+
+    // Сброс выбранного тарифа и цены
+    selectedTariffPrice = 0;
+    selectedTariffName = null;
+
+    updatePrice();
+}
+
+
+function togglePagesInput() {
+    const checkbox = document.getElementById("opt_pages");
+    const block = document.getElementById("pagesCountBlock");
+
+    if (checkbox.checked) {
+        block.classList.remove("hidden");
+    } else {
+        block.classList.add("hidden");
+        document.getElementById("pagesCount").value = "";
+    }
+}
+
+function updatePrice() {
+    let price = selectedTariffPrice;
+
+    const db = document.getElementById("opt_db").checked;
+    const payment = document.getElementById("opt_payment").checked;
+    const pagesEnabled = document.getElementById("opt_pages").checked;
+    const pagesCount = parseInt(document.getElementById("pagesCount").value) || 0;
+
+    if (db) price += 10000;
+    if (payment) price += 10000;
+
+    if (pagesEnabled && pagesCount > 0) {
+        price += pagesCount * 2000;
+    }
+
+    document.getElementById("priceDisplay").textContent =
+        `Цена: ${price.toLocaleString("ru-RU")} ₽`;
+}
+
+
+function togglePagesInput() {
+    const checkbox = document.getElementById("opt_pages");
+    const block = document.getElementById("pagesCountBlock");
+
+    if (checkbox.checked) {
+        block.classList.remove("hidden");
+    } else {
+        block.classList.add("hidden");
+        document.getElementById("pagesCount").value = "";
+    }
+
+    updatePrice();
+}
+
 </script>
 
 </body>
