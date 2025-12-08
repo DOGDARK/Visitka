@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class OrderRequest(BaseModel):
-    desciption: str | None = None
+    description: str | None = None
     tariff: str | None = None
     db: bool = False
     payment: bool = False
@@ -16,7 +16,7 @@ class OrderRequest(BaseModel):
 
 class OrderResponse(BaseModel):
     id: int
-    desciption: str | None = None
+    description: str | None = None
     tariff: str | None = None
     db: bool = False
     payment: bool = False

@@ -1,6 +1,6 @@
 from enum import Enum
 
-from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy import ForeignKey, Integer, String, Boolean, Enum as SQLEnum
 from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.api.core.models import Base
@@ -21,9 +21,9 @@ class Order(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     description: Mapped[str] = mapped_column(String(128), nullable=True)
     tariff: Mapped[str] = mapped_column(String(128), nullable=False)
-    db: Mapped[bool] = mapped_column(bool, default=False)
-    payment: Mapped[bool] = mapped_column(bool, default=False)
-    pagesEnabled: Mapped[bool] = mapped_column(bool, default=False)
+    db: Mapped[bool] = mapped_column(Boolean, default=False)
+    payment: Mapped[bool] = mapped_column(Boolean, default=False)
+    pagesEnabled: Mapped[bool] = mapped_column(Boolean, default=False)
     pagesCount: Mapped[int] = mapped_column(Integer, nullable=True)
     finalPrice: Mapped[int] = mapped_column(Integer, nullable=False)
-    order_status: Mapped[OrderStatus] = mapped_column(Enum(OrderStatus), nullable=False, default=OrderStatus.NEW)
+    order_status: Mapped[OrderStatus] = mapped_column(SQLEnum(OrderStatus), nullable=False, default=OrderStatus.NEW)

@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.api.core.db_init import close_orm, init_orm
 from backend.api.core.exception_handler import http_exception_handler
 from backend.api.users.routers import users_router
+from backend.api.orders.routers import orders_router
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(users_router)
+app.include_router(orders_router)
 app.add_exception_handler(HTTPException, http_exception_handler)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"])
 

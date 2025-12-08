@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="stylesheet" href="/Users/matvey/programming/html/style.css" />
+<link rel="stylesheet" href="styles.css" />
 <title>Mini App</title>
 </head>
 <body>
@@ -212,14 +212,14 @@ function sendOrder() {
     .catch(err => console.error("Ошибка отправки данных:", err));
 
     const payload_order = {
-        desc,
+        description: desc,
         tariff,
         db,
         payment,
         pagesEnabled,
         pagesCount,
         finalPrice,
-        initData
+        init_data: initData
     };
 
     console.log("Отправка:", payload_order);
@@ -289,14 +289,14 @@ function closeTariffModal() {
 
 
         const payload_order = {
-            desc,
+            description: desc,
             tariff,
             db,
             payment,
             pagesEnabled,
             pagesCount,
             finalPrice,
-            initData
+            init_data: initData
         };
 
         fetch("http://0.0.0.0:8000/orders", {
