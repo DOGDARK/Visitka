@@ -8,10 +8,12 @@ from sqlalchemy.exc import IntegrityError
 from backend.api.orders.repo import Repo
 from backend.api.orders.schemas import OrderRequest, OrderResponse
 
+from backend.api.users.repo import Repo as UserRepo
 
 class Service:
-    def __init__(self, repo: Repo) -> None:
+    def __init__(self, repo: Repo, user_repo: UserRepo) -> None:
         self._repo = repo
+        self._user_repo = user_repo
 
     async def create_order(self, order_data: OrderRequest) -> OrderResponse:
         data = order_data.model_dump(by_alias=True)
@@ -19,11 +21,11 @@ class Service:
 
         parsed = self._parse_init_data(init_data)
         tg_user_id = parsed.get("user", {}).get("id")
+        user = await self._user_repo.get_user_by_tg_id(tg_user_id)
+        if not user:
+            raise HTTPException(status_code=400, detail="User not found")
 
-        if not tg_user_id:
-            raise HTTPException(status_code=400, detail="tg_user_id not found")
-
-        data["user_id"] = tg_user_id
+        data["user_id"] = user.id
 
         try:
             order = await self._repo.create_order(data)

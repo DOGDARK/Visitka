@@ -13,7 +13,6 @@ class OrderRequest(BaseModel):
 
 
 
-
 class OrderResponse(BaseModel):
     id: int
     description: str | None = None
@@ -23,3 +22,9 @@ class OrderResponse(BaseModel):
     pagesEnabled: bool = False
     pagesCount: int | None = None
     finalPrice: int | None = None
+    order_status: str | None = None
+
+
+    model_config = {
+        "from_attributes": True
+    }
