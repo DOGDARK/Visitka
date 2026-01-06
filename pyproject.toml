@@ -3,4 +3,4 @@ line-length = 120
 lint.extend-select = ["I"]
 lint.select = ["E", "F", "ANN"]
 lint.ignore = ["ANN401"]
-exclude =["tmp", ".venv", "volumes"]
+exclude =["tmp", ".venv", "volumes", "tests"]

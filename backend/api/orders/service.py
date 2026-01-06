@@ -7,8 +7,8 @@ from sqlalchemy.exc import IntegrityError
 
 from backend.api.orders.repo import Repo
 from backend.api.orders.schemas import OrderRequest, OrderResponse
-
 from backend.api.users.repo import Repo as UserRepo
+
 
 class Service:
     def __init__(self, repo: Repo, user_repo: UserRepo) -> None:

@@ -8,8 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.api.core.db_init import close_orm, init_orm
 from backend.api.core.exception_handler import http_exception_handler
-from backend.api.users.routers import users_router
 from backend.api.orders.routers import orders_router
+from backend.api.users.routers import users_router
 
 logger = logging.getLogger(__name__)
 
