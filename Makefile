@@ -10,3 +10,6 @@ build_api:
 
 build_bot:
 	docker build -t bot:latest -f Dockerfile.bot .
+
+up_tdb:
+	docker run -d -p "5431:5432" --rm --name tdb -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=tdb postgres

@@ -9,15 +9,8 @@ from backend.api.orders.schemas import OrderResponse
 client = TestClient(app)
 
 
-def override_get_service(expected_resp):
-    serv = AsyncMock()
-    serv.create_order.return_value = expected_resp
-    serv.get_order.return_value = expected_resp
-    return serv
-
-
 def test_create_order():
-    expected_resp = OrderResponse(id=1)
+    expected_resp = OrderResponse(id=1, final_price= 10, tariff="tariff")
 
     def override_get_service():
         serv = AsyncMock()
@@ -26,15 +19,15 @@ def test_create_order():
 
     app.dependency_overrides[get_service] = override_get_service
 
-    response = client.post("/orders", json={"init_data": "data"})
-    print(response.json())
+    response = client.post("/orders", json={"init_data": "data", "final_price": 10, "tariff": "tariff"})
 
     assert response.status_code == 201
-    assert 1 == expected_resp.model_dump().get("id")
+    assert response.json() == expected_resp.model_dump()
+
 
 
 def test_get_order():
-    expected_resp = OrderResponse(id=1)
+    expected_resp = OrderResponse(id=1, final_price= 10, tariff="tariff")
 
     def override_get_service():
         serv = AsyncMock()
@@ -44,7 +37,6 @@ def test_get_order():
     app.dependency_overrides[get_service] = override_get_service
 
     response = client.get("/orders/1")
-    print(response.json())
 
     assert response.status_code == 200
-    assert 1 == expected_resp.model_dump().get("id")
+    assert response.json() == expected_resp.model_dump()
