@@ -1,0 +1,5 @@
+FROM postgres:alpine
+RUN apk add --no-cache supervisor
+RUN mkdir /etc/supervisor.d
+COPY postgres_cron.ini /etc/supervisor.d/postgres_cron.ini
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

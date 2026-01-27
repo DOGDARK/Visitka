@@ -10,3 +10,6 @@ build_api:
 
 build_bot:
 	docker build -t bot:latest -f Dockerfile.bot .
+
+build_pg:
+	docker build -f Dockerfile.pg -t pg:latest .

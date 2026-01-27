@@ -11,42 +11,74 @@
 
 <!-- Главная страница -->
 <div id="screen1" class="page active">
+
+                <!-- STORIES -->
+    <div id="storiesOverlay" class="stories hidden">
+        <div class="stories-window">
+
+            <div class="stories-progress"></div>
+
+            <div class="story-content">
+                <div id="storyText"></div>
+            </div>
+
+            <div class="story-tap left"></div>
+            <div class="story-tap right"></div>
+
+        </div>
+    </div>
+
+
+        <!-- STORIES BUTTONS -->
+    <div class="stories-buttons">
+        <div class="story-btn" onclick="openStoryGroup(0)">
+            <span>1</span>
+        </div>
+        <div class="story-btn" onclick="openStoryGroup(1)">
+            <span>2</span>
+        </div>
+        <div class="story-btn" onclick="openStoryGroup(2)">
+            <span>3</span>
+        </div>
+    </div>
+
     <div style="text-align:center; margin-top:40px;">
-        <h1 id="companyName">Название</h1>
-        <p id="companyDesc">Описание</p>
+        <h1 id="companyName">Telegram Mini App</h1>
+
+        <p id="companyDesc">Создаём удобные и функциональные приложения внутри Telegram для бизнеса и личных целей.</p>
     </div>
 
     <!-- Блок тарифов -->
     <div class="tariffs-block">
-        <h2 class="tariff-title">Тарифы</h2>
+        <h2 class="tariff-title">Тарифы разработки</h2>
 
         <div class="tariff-list">
 
             <div class="tariff-card"
-                onclick="openTariff('Тариф 1', 'Описание тарифа 1', 10000)">
+                onclick="openTariff('Тариф «Базовый / Старт»', 'Подходит для: тестирования идеи, промо-акций, быстрых MVP, простых форм и лид-генерации.Что входит:• 1–4 экрана• Авторизация через Telegram• Простая логика: формы, вывод информации• Лёгкий backend (Google Sheets / Firebase / простой REST endpoint)• Деплой на ваш хостинг или наш временный сервер• Поддержка 7–14 дней', 10000)">
                 <div class="tariff-header">
-                    <h3>Тариф 1</h3>
-                    <span class="price">10 000 ₽</span>
+                    <h3>Базовый / Старт</h3>
+                    <span class="price">от 10 000 ₽</span>
                 </div>
-                <p>Краткое описание тарифа</p>
+                <p>3–14 дней. Для тестирования идеи, промо-страниц и простых форм.</p>
             </div>
 
             <div class="tariff-card"
-                onclick="openTariff('Тариф 2', 'Описание тарифа 2', 20000)">
+                onclick="openTariff('Тариф «Стандарт / Коммерческий»', 'Подходит для: малого и среднего бизнеса, e-commerce, сервисов бронирования, каталогов, личных кабинетов, сервисных приложений.Что входит:• Индивидуальная стилизация• Полноценный backend: REST API, база данных• Личный кабинет, авторизация, профили• Интеграция 1 платёжного шлюза (ЮKassa, Тинькофф, CloudPayments)• Подключение аналитики (Яндекс.Метрика / GA4)• Логирование, мониторинг ошибок• Webhooks для работы с ботом• Тестирование: функциональное + кросс-клиентное• Документация по запуску• Поддержка 1–3 месяца (критические баги)Что НЕ входит (за доплату):• Интеграция нескольких платёжных систем• Админ-панель расширенного типа• TON/Web3• CRM/ERP глубокая интеграция• Нагрузочное тестирование', 30000)">
                 <div class="tariff-header">
-                    <h3>Тариф 2</h3>
-                    <span class="price">20 000 ₽</span>
+                    <h3>Стандарт / Коммерческий</h3>
+                    <span class="price">от 30 000 ₽</span>
                 </div>
-                <p>Краткое описание тарифа</p>
+                <p>3–8 недель. Для малого и среднего бизнеса, e-commerce, каталогов.</p>
             </div>
 
             <div class="tariff-card"
-                onclick="openTariff('Тариф 3', 'Описание тарифа 3', 30000)">
+                onclick="openTariff('Тариф «Премиум / Enterprise»', 'Подходит для: крупных компаний, маркетплейсов, сложных интеграций, продуктов с высокой нагрузкой или Web3/TON.Что входит:• Неограниченное количество экранов• Полная UX/UI разработка, дизайн-система• Масштабируемый backend (микросервисы / кластер)• Интеграции с CRM, ERP, 1С, логистикой, платёжными системами• TON/Web3 / смарт-контракты (опционально)• Реализация real-time функционала (WebSocket)• CI/CD, мониторинг, логирование, бэкапы• Нагрузочное тестирование• SLA-поддержка 3–12 месяцев• Документация и обучение команды заказчика', 60000)">
                 <div class="tariff-header">
-                    <h3>Тариф 3</h3>
-                    <span class="price">30 000 ₽</span>
+                    <h3>Премиум / Enterprise</h3>
+                    <span class="price">от 60 000 ₽</span>
                 </div>
-                <p>Краткое описание тарифа</p>
+                <p>2–6+ месяцев. Для крупных компаний, сложных интеграций и высоких нагрузок.</p>
             </div>
 
         </div>
@@ -67,7 +99,7 @@
         <div class="form">
             <input id="name" type="text" placeholder="Ваше имя" />
             <input id="username" type="text" placeholder="Ваш Telegram @username" />
-            <textarea id="description" placeholder="Описание заказа"></textarea>
+            <textarea id="description" placeholder="Описание вашего проекта или задачи"></textarea>
 
             <!-- Доп опции -->
             <div class="extra-options">
@@ -75,12 +107,12 @@
 
                 <label class="option-item">
                     <input type="checkbox" id="opt_db" onchange="updatePrice()">
-                    <span>База данных</span>
+                    <span>Интеграция базы данных</span>
                 </label>
 
                 <label class="option-item">
                     <input type="checkbox" id="opt_payment" onchange="updatePrice()">
-                    <span>Проверка оплаты</span>
+                    <span>Интеграция платежей</span>
                 </label>
 
                 <label class="option-item">
@@ -96,295 +128,12 @@
 
             <div id="priceDisplay" class="price-display">Цена: 0 ₽</div>
 
-            <div class="btn" onclick="sendOrder()">Отправить</div>
+            <div class="btn" onclick="sendOrder()">Отправить заявку</div>
         </div>
     </div>
 </div>
 
-<script>
-/* Открытие модального окна */
-let selectedTariffPrice = 0;
-let orderSent = false;
-
-function openTariff(title, desc, price) {
-    document.getElementById("modalTitle").textContent = title;
-    document.getElementById("modalDesc").textContent = desc;
-
-    selectedTariffPrice = price;
-
-    document.getElementById("tariffModal").classList.add("active");
-
-    updatePrice();
-}
-
-
-/* Закрытие модального окна */
-function closeModal() {
-    document.getElementById("tariffModal").classList.remove("active");
-}
-
-/* Всплывающее уведомление */
-function showMessage(msg, duration = 3000) {
-    const div = document.createElement("div");
-    div.className = "message";
-    div.textContent = msg;
-    document.body.appendChild(div);
-    setTimeout(() => div.remove(), duration);
-}
-
-/* Отправка формы */
-// function sendOrder() {
-//     const initData = "user={\"id\":1212333}&auth_date=1234567890";
-
-//     const name = document.getElementById("name").value.trim();
-//     const username = document.getElementById("username").value.trim();
-//     const description = document.getElementById("description").value.trim();
-
-//     if (!name || !description) {
-//         showMessage("Пожалуйста, заполните все обязательные поля");
-//         return;
-//     }
-
-//     const payload = {
-//         init_data: initData,
-//         first_name: name || null,
-//         last_name: username || null
-//     };
-
-//     fetch("http://0.0.0.0:8000/users", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(payload)
-//     })
-//     .then(response => {
-//         if (!response.ok) throw new Error("Ошибка сети");
-//         return response.json();
-//     })
-//     .then(data => {
-//         showMessage("Заявка отправлена!");
-//         document.getElementById("name").value = "";
-//         document.getElementById("username").value = "";
-//         document.getElementById("description").value = "";
-//         closeModal();
-//     })
-//     .catch(error => {
-//         console.error(error);
-//         showMessage("Ошибка при отправке!");
-//     });
-// }
-
-function sendOrder() {
-    const name = document.getElementById("name").value.trim();
-    const username = document.getElementById("username").value.trim();
-    const desc = document.getElementById("description").value.trim();
-
-    const db = document.getElementById("opt_db").checked;
-    const payment = document.getElementById("opt_payment").checked;
-    const pagesEnabled = document.getElementById("opt_pages").checked;
-    const pagesCount = pagesEnabled ? (parseInt(document.getElementById("pagesCount").value) || 0) : 0;
-
-    const finalPriceText = document.getElementById("priceDisplay").textContent;
-    const finalPrice = parseInt(finalPriceText.replace(/\D/g, ""));
-
-    const initData = "user={\"id\":1217562333}&auth_date=1234567890";
-    // const initData = window.Telegram.WebApp.initData || "";
-
-    const tariff = document.getElementById("modalTitle").textContent;
-
-    if (!name || !description) {
-    showMessage("Пожалуйста, заполните все обязательные поля");
-    return;
-    };
-
-    const payload_user = {
-        init_data: initData,
-        first_name: name || null,
-        last_name: username || null
-    };
-
-    fetch("http://0.0.0.0:8000/users", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload_user)
-    })
-    .then(res => res.json())
-    .then(data => console.log("Данные отправлены:", data))
-    .catch(err => console.error("Ошибка отправки данных:", err));
-
-    const payload_order = {
-        description: desc,
-        tariff,
-        db,
-        payment,
-        pagesEnabled,
-        pagesCount,
-        finalPrice,
-        init_data: initData
-    };
-
-    console.log("Отправка:", payload_order);
-
-    // отправляем в бэк
-    fetch("http://0.0.0.0:8000/orders", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload_order)
-    })
-    .then(response => {
-        if (!response.ok) throw new Error("Ошибка сети");
-        return response.json();
-    })
-    .then(data => {
-        showMessage("Заявка отправлена!");
-
-        orderSent = true; 
-        closeTariffModal();
-        resetForm();
-    })
-    .catch(error => {
-        console.error(error);
-        showMessage("Ошибка при отправке!");
-    });
-}
-
-
-function closeTariffModal() {
-    const name = document.getElementById("name").value.trim();
-    const username = document.getElementById("username").value.trim();
-    const desc = document.getElementById("description").value.trim();
-
-    const db = document.getElementById("opt_db").checked;
-    const payment = document.getElementById("opt_payment").checked;
-    const pagesEnabled = document.getElementById("opt_pages").checked;
-    const pagesCount = pagesEnabled ? (parseInt(document.getElementById("pagesCount").value) || 0) : 0;
-
-    const finalPriceText = document.getElementById("priceDisplay").textContent;
-    const finalPrice = parseInt(finalPriceText.replace(/\D/g, ""));
-
-    // initData от Telegram WebApp
-    const initData = "user={\"id\":1212333}&auth_date=1234567890";
-    // const initData = window.Telegram.WebApp.initData || "";
-
-    const tariff = document.getElementById("modalTitle").textContent;
-
-    document.getElementById("tariffModal").classList.remove("active");
-    resetForm();
-
-    // Отправка только если заказ ещё не был отправлен
-    if (!orderSent && (db || payment || pagesEnabled || name || username || desc)) {
-        const payload_user = {
-        init_data: initData,
-        first_name: name || null,
-        last_name: username || null
-        };
-
-        fetch("http://0.0.0.0:8000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload_user)
-        })
-        .then(res => res.json())
-        .then(data => console.log("Данные отправлены:", data))
-        .catch(err => console.error("Ошибка отправки данных:", err));
-
-
-        const payload_order = {
-            description: desc,
-            tariff,
-            db,
-            payment,
-            pagesEnabled,
-            pagesCount,
-            finalPrice,
-            init_data: initData
-        };
-
-        fetch("http://0.0.0.0:8000/orders", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload_order)
-        })
-        .then(res => res.json())
-        .then(data => console.log("Данные отправлены:", data))
-        .catch(err => console.error("Ошибка отправки данных:", err));
-    }
-
-    orderSent = false;
-}
-
-
-
-
-function resetForm() {
-    // Сброс текстовых полей
-    document.getElementById("name").value = "";
-    document.getElementById("username").value = "";
-    document.getElementById("description").value = "";
-
-    // Чекбоксы
-    document.getElementById("opt_db").checked = false;
-    document.getElementById("opt_payment").checked = false;
-    document.getElementById("opt_pages").checked = false;
-
-    // Доп страницы
-    document.getElementById("pagesCount").value = "";
-    document.getElementById("pagesCountBlock").classList.add("hidden");
-
-    // Сброс выбранного тарифа и цены
-    selectedTariffPrice = 0;
-    selectedTariffName = null;
-
-    updatePrice();
-}
-
-
-function togglePagesInput() {
-    const checkbox = document.getElementById("opt_pages");
-    const block = document.getElementById("pagesCountBlock");
-
-    if (checkbox.checked) {
-        block.classList.remove("hidden");
-    } else {
-        block.classList.add("hidden");
-        document.getElementById("pagesCount").value = "";
-    }
-}
-
-function updatePrice() {
-    let price = selectedTariffPrice;
-
-    const db = document.getElementById("opt_db").checked;
-    const payment = document.getElementById("opt_payment").checked;
-    const pagesEnabled = document.getElementById("opt_pages").checked;
-    const pagesCount = parseInt(document.getElementById("pagesCount").value) || 0;
-
-    if (db) price += 10000;
-    if (payment) price += 10000;
-
-    if (pagesEnabled && pagesCount > 0) {
-        price += pagesCount * 2000;
-    }
-
-    document.getElementById("priceDisplay").textContent =
-        `Цена: ${price.toLocaleString("ru-RU")} ₽`;
-}
-
-
-function togglePagesInput() {
-    const checkbox = document.getElementById("opt_pages");
-    const block = document.getElementById("pagesCountBlock");
-
-    if (checkbox.checked) {
-        block.classList.remove("hidden");
-    } else {
-        block.classList.add("hidden");
-        document.getElementById("pagesCount").value = "";
-    }
-
-    updatePrice();
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
