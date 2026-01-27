@@ -30,8 +30,16 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(users_router)
 app.include_router(orders_router)
 app.add_exception_handler(HTTPException, http_exception_handler)
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"])
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# if __name__ == "__main__":
+    # uvicorn.run(app, host="0.0.0.0", port=8000)
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)

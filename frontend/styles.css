@@ -1,259 +1,280 @@
 /* Основные стили */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--tg-theme-bg-color, #0a0a0f);
-    color: var(--tg-theme-text-color, #d9cfff);
+    color: var(--tg-theme-text-color, #e8d9ff);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-/* Страницы */
-.page {
-    padding: 24px;
-    display: none;
-}
-.page.active {
-    display: block;
+/* Контейнер для главной страницы */
+#screen1 {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    padding-bottom: 100px;
 }
 
 /* Заголовки */
 h1 {
-    color: var(--tg-theme-button-color, #b67bff);
-}
-
-/* Кнопки */
-.btn {
-    display: inline-block;
-    padding: 12px 20px;
-    background: var(--tg-theme-button-color, #8a2be2);
-    border-radius: 10px;
-    margin-top: 20px;
-    color: var(--tg-theme-button-text-color, white);
-    text-decoration: none;
-    font-weight: bold;
+    color: var(#b67bff);
+    font-size: 36px;
+    margin-bottom: 16px;
     text-align: center;
-    cursor: pointer;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
 }
 
-/* Формы */
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 20px;
-}
-
-input, textarea {
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    background: var(--tg-theme-secondary-bg-color, #1a1125);
-    color: var(--tg-theme-text-color, #e8d9ff);
-}
-
-textarea {
-    height: 120px;
-    resize: none;
-}
-
-/* Новости */
-.news-block {
-    margin-top: 40px;
-}
-
-.news-card {
-    background: var(--tg-theme-secondary-bg-color, #1a1125);
-    padding: 16px;
-    border-radius: 14px;
-    margin-top: 16px;
-    color: var(--tg-theme-text-color, #e8d9ff);
-}
-
-.news-card h3 {
-    margin: 0 0 6px 0;
-    color: var(--tg-theme-button-color, #b67bff);
-}
-
-/* Нижнее меню */
-.nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: var(--tg-theme-secondary-bg-color, #141018);
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0;
-}
-
-.nav-item {
-    font-size: 22px;
-    cursor: pointer;
-}
-
-/* Уведомления (улучшенные) */
-.message {
-    position: fixed;
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
     left: 50%;
-    bottom: -60px; /* Начинает ниже экрана */
     transform: translateX(-50%);
-    background: var(--tg-theme-button-color, #31055a);
-    color: var(--tg-theme-button-text-color, #fff);
-    padding: 12px 22px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    z-index: 2000;
-    opacity: 0;
-    animation: slideUp 0.3s forwards, slideDown 0.3s forwards 2.7s;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #b67bff, #8a2be2);
+    border-radius: 2px;
 }
 
-@keyframes slideUp {
-    from {
-        bottom: -50px;
-        opacity: 0;
-    }
-    to {
-        bottom: 25px;
-        opacity: 1;
-    }
+h2 {
+    color: var(--tg-theme-text-color, #e8d9ff);
+    font-size: 24px;
+    margin: 40px 0 24px 0;
+    font-weight: 700;
+    padding-left: 20px;
+    position: relative;
 }
 
-@keyframes slideDown {
-    from {
-        bottom: 25px;
-        opacity: 1;
-    }
-    to {
-        bottom: -50px;
-        opacity: 0;
-    }
+h2::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(#b67bff);
+    font-size: 18px;
 }
 
+h3 {
+    color: var(#b67bff);
+    font-size: 20px;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
 
+/* Блок описания компании */
+#companyName {
+    font-size: 40px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
 
-/* ============================= */
-/*        ВСПЛЫВАЮЩЕЕ ОКНО       */
-/* ============================= */
+#companyDesc {
+    font-size: 17px;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 24px;
+    background: linear-gradient(135deg, 
+        rgba(182, 123, 255, 0.1), 
+        rgba(138, 43, 226, 0.1)
+    );
+    border-radius: 20px;
+    border: 1px solid rgba(182, 123, 255, 0.2);
+    text-align: center;
+    line-height: 1.7;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
 
-/* Модалка скрыта по умолчанию */
-.modal {
-    display: none;
-    position: fixed;
+#companyDesc::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(182, 123, 255, 0.5), 
+        transparent
+    );
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Информационные блоки - стилизованные карточки */
+.info-block {
+    background: linear-gradient(135deg, 
+        rgba(26, 17, 37, 0.8), 
+        rgba(31, 20, 45, 0.8)
+    );
+    border-radius: 20px;
+    padding: 30px;
+    margin: 35px 0;
+    border: 1px solid rgba(182, 123, 255, 0.15);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-block::before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    padding: 20px;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #b67bff, #8a2be2);
+    border-radius: 20px 20px 0 0;
 }
 
-/* Показываем, когда добавлен .active */
-.modal.active {
-    display: flex;
-}
-
-/* Контент внутри окна */
-.modal-content {
-    background: var(--tg-theme-bg-color, #0f0b14);
-    color: var(--tg-theme-text-color, #e8d9ff);
-    padding: 20px;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 420px;
+.info-block p {
+    margin: 18px 0;
+    padding: 18px 20px;
+    background: rgba(182, 123, 255, 0.07);
+    border-radius: 14px;
+    border: 1px solid rgba(182, 123, 255, 0.1);
+    transition: all 0.3s ease;
     position: relative;
-    animation: popup 0.25s ease;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    overflow: hidden;
 }
 
-/* Анимация появления */
-@keyframes popup {
-    0% { transform: scale(0.85); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* Крестик закрытия */
-.modal-close {
+.info-block p::before {
+    content: '';
     position: absolute;
-    top: 10px;
-    left: 10px; /* по твоему запросу — слева */
-    font-size: 22px;
-    cursor: pointer;
-    user-select: none;
-    color: var(--tg-theme-button-color, #b67bff);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #b67bff, #8a2be2);
+    border-radius: 3px;
 }
 
-/* Заголовок внутри окна */
-.modal-content h2 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    color: var(--tg-theme-button-color, #b67bff);
+.info-block p:hover {
+    background: rgba(182, 123, 255, 0.12);
+    border-color: rgba(182, 123, 255, 0.25);
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(182, 123, 255, 0.1);
 }
 
-/* Описание тарифа */
-.modal-content p {
-    margin-bottom: 20px;
-    opacity: 0.85;
+.info-block strong {
+    color: var(#b67bff);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.info-block p br + span {
+    color: rgba(232, 217, 255, 0.8);
     font-size: 15px;
-    text-align: center;
+    line-height: 1.6;
+    display: block;
+    margin-top: 6px;
 }
-
-/* Блок доп. опций */
-.extra-options {
-    background: var(--tg-theme-secondary-bg-color, #1a1125);
-    padding: 12px;
-    border-radius: 10px;
-}
-
-.extra-options h3 {
-    margin: 0 0 10px 0;
-    color: var(--tg-theme-button-color, #b67bff);
-}
-
 
 /* ============================= */
 /*          БЛОК ТАРИФОВ         */
 /* ============================= */
 
 .tariffs-block {
-    margin-top: 40px;
+    margin: 50px 0;
+    position: relative;
 }
 
 .tariff-title {
-    font-size: 26px;
-    margin-bottom: 20px;
+    font-size: 32px;
+    margin-bottom: 40px;
     text-align: center;
-    color: var(--tg-theme-button-color, #b67bff);
+    color: #b67bff;
+    font-weight: 800;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tariff-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 25%;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(#b67bff), 
+        transparent
+    );
 }
 
 .tariff-list {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 25px;
 }
 
 /* Карточка тарифа */
 .tariff-card {
-    background: linear-gradient(135deg,
-        rgba(182, 123, 255, 0.12),
-        rgba(88, 0, 150, 0.12)
+    background: linear-gradient(135deg, 
+        rgba(182, 123, 255, 0.08), 
+        rgba(138, 43, 226, 0.08)
     );
-    border: 1px solid rgba(182, 123, 255, 0.25);
-    padding: 18px;
-    border-radius: 16px;
+    border: 2px solid transparent;
+    padding: 28px;
+    border-radius: 24px;
     cursor: pointer;
-    transition: 0.25s ease;
-    box-shadow: 0 0 12px rgba(0,0,0,0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
-/* Наведение */
+.tariff-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 24px;
+    background: linear-gradient(135deg, 
+        rgba(182, 123, 255, 0.3), 
+        rgba(138, 43, 226, 0.3)
+    ) border-box;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
 .tariff-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 18px rgba(182, 123, 255, 0.25);
-    border-color: rgba(182, 123, 255, 0.45);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(182, 123, 255, 0.2),
+        0 0 60px rgba(182, 123, 255, 0.1);
+}
+
+.tariff-card:hover::before {
+    border-color: rgba(182, 123, 255, 0.5);
 }
 
 /* Верхняя строка */
@@ -261,49 +282,276 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 
-/* Название тарифа */
 .tariff-card h3 {
+    color: var(#b67bff);
+    font-size: 22px;
+    font-weight: 700;
     margin: 0;
-    font-size: 20px;
-    color: var(--tg-theme-button-color, #b67bff);
 }
 
-/* Цена */
 .price {
-    background: rgba(182, 123, 255, 0.15);
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-weight: bold;
-    color: var(--tg-theme-text-color, #e8d9ff);
-    border: 1px solid rgba(182, 123, 255, 0.3);
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    padding: 10px 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    color: white;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(182, 123, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.price::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    transform: rotate(45deg);
 }
 
 /* Описание */
 .tariff-card p {
-    margin-top: 10px;
-    opacity: 0.85;
-    font-size: 14px;
+    color: rgba(232, 217, 255, 0.9);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 15px;
+    background: rgba(182, 123, 255, 0.05);
+    border-radius: 12px;
+    border-left: 3px solid rgba(182, 123, 255, 0.3);
+}
+
+/* ============================= */
+/*        МОДАЛЬНОЕ ОКНО         */
+/* ============================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, 
+        rgba(15, 11, 20, 0.95), 
+        rgba(26, 17, 37, 0.95)
+    );
+    color: var(--tg-theme-text-color, #e8d9ff);
+    padding: 35px;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid rgba(182, 123, 255, 0.2);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(182, 123, 255, 0.1);
+    animation: modalAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(182, 123, 255, 0.1);
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #b67bff, #8a2be2);
+    border-radius: 4px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(#b67bff);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+    background: rgba(182, 123, 255, 0.1);
+    z-index: 2;
+}
+
+.modal-close:hover {
+    background: rgba(182, 123, 255, 0.2);
+    transform: rotate(90deg);
+    box-shadow: 0 0 20px rgba(182, 123, 255, 0.3);
+}
+
+#modalTitle {
+    margin: 10px 0 25px 0;
+    text-align: center;
+    color: var(#b67bff);
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#modalDesc {
+    color: rgba(232, 217, 255, 0.9);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    padding: 25px;
+    background: rgba(182, 123, 255, 0.07);
+    border-radius: 18px;
+    border: 1px solid rgba(182, 123, 255, 0.15);
+    position: relative;
+}
+
+/* Формы */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+input, textarea {
+    padding: 16px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(182, 123, 255, 0.2);
+    background: rgba(26, 17, 37, 0.7);
+    color: var(--tg-theme-text-color, #e8d9ff);
+    font-size: 16px;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+input::placeholder, textarea::placeholder {
+    color: rgba(232, 217, 255, 0.5);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: rgba(182, 123, 255, 0.5);
+    background: rgba(26, 17, 37, 0.9);
+    box-shadow: 
+        0 0 0 3px rgba(182, 123, 255, 0.1),
+        0 0 20px rgba(182, 123, 255, 0.1);
+}
+
+textarea {
+    height: 130px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Блок доп. опций */
+.extra-options {
+    background: rgba(26, 17, 37, 0.7);
+    padding: 25px;
+    border-radius: 18px;
+    margin-top: 20px;
+    border: 1px solid rgba(182, 123, 255, 0.15);
+}
+
+.extra-options h3 {
+    color: var(#b67bff);
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.extra-options h3::before {
+    content: '⚙️';
 }
 
 /* Чекбокс-опции */
 .option-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 15px;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(182, 123, 255, 0.05);
+    border: 1px solid rgba(182, 123, 255, 0.1);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.option-item:hover {
+    background: rgba(182, 123, 255, 0.1);
+    border-color: rgba(182, 123, 255, 0.3);
+    transform: translateX(5px);
 }
 
 .option-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    accent-color: var(#b67bff);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(182, 123, 255, 0.2);
 }
 
 /* Блок поля количества */
 .pages-input {
-    margin-top: 10px;
+    margin-top: 20px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .pages-input.hidden {
@@ -312,21 +560,571 @@ textarea {
 
 .pages-input input {
     width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    background: var(--tg-theme-secondary-bg-color, #1a1125);
-    color: var(--tg-theme-text-color, #e8d9ff);
+    background: rgba(182, 123, 255, 0.1);
+    border: 1px solid rgba(182, 123, 255, 0.3);
 }
 
+/* Отображение цены */
 .price-display {
-    margin-top: 10px;
-    padding: 12px;
-    background: rgba(182, 123, 255, 0.12);
-    border: 1px solid rgba(182, 123, 255, 0.3);
-    border-radius: 12px;
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, 
+        rgba(182, 123, 255, 0.1), 
+        rgba(138, 43, 226, 0.1)
+    );
+    border: 2px solid rgba(182, 123, 255, 0.3);
+    border-radius: 18px;
     text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(#b67bff);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 0 20px rgba(182, 123, 255, 0.1),
+        0 10px 30px rgba(182, 123, 255, 0.2);
+}
+
+.price-display::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+    );
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    padding: 18px 28px;
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    color: white;
+    border-radius: 16px;
+    margin-top: 30px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    border: none;
     font-size: 18px;
-    font-weight: bold;
-    color: var(--tg-theme-button-color, #b67bff);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 25px rgba(182, 123, 255, 0.3),
+        0 0 30px rgba(182, 123, 255, 0.1);
+    letter-spacing: 0.5px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 15px 35px rgba(182, 123, 255, 0.4),
+        0 0 50px rgba(182, 123, 255, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+/* Уведомления */
+.message {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    color: white;
+    padding: 18px 36px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    z-index: 2000;
+    opacity: 0;
+    animation: slideUp 0.3s forwards, slideDown 0.3s forwards 2.7s;
+    box-shadow: 
+        0 10px 30px rgba(182, 123, 255, 0.4),
+        0 0 40px rgba(182, 123, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    min-width: 300px;
+    text-align: center;
+}
+
+@keyframes slideUp {
+    from {
+        bottom: -60px;
+        opacity: 0;
+    }
+    to {
+        bottom: 40px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        bottom: 40px;
+        opacity: 1;
+    }
+    to {
+        bottom: -60px;
+        opacity: 0;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #screen1 {
+        padding: 16px;
+        padding-bottom: 80px;
+    }
+    
+    .info-block {
+        padding: 20px;
+        margin: 25px 0;
+    }
+    
+    .tariff-card {
+        padding: 20px;
+    }
+    
+    .tariff-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .price {
+        align-self: flex-start;
+    }
+    
+    .modal-content {
+        padding: 25px 20px;
+        margin: 10px;
+        max-height: 95vh;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    h2 {
+        font-size: 22px;
+    }
+    
+    #companyName {
+        font-size: 32px;
+    }
+    
+    .tariff-title {
+        font-size: 26px;
+    }
+    
+    .price-display {
+        font-size: 20px;
+        padding: 20px;
+    }
+}
+
+/* Декор элементы */
+.decor {
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.decor-1 {
+    top: 10%;
+    left: 5%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(182, 123, 255, 0.05) 0%, transparent 70%);
+}
+
+.decor-2 {
+    bottom: 10%;
+    right: 5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.05) 0%, transparent 70%);
+}
+
+
+/* ================= STORIES ================= */
+
+.stories {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+.stories.hidden {
+    display: none;
+}
+
+/* Окно сторис */
+.stories-window {
+    width: 100%;
+    max-width: 420px;
+    height: 75vh;
+    background: #000;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Прогресс */
+.stories-progress {
+    display: flex;
+    gap: 6px;
+    padding: 10px;
+}
+
+.stories-progress div {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,.25);
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.stories-progress span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: white;
+}
+
+/* Контент */
+.story-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+#storyText {
+    color: white;
+    font-size: 22px;
+    line-height: 1.5;
+    max-width: 600px;
+    white-space: pre-line;
+}
+
+/* Тап-зоны */
+.story-tap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+}
+
+.story-tap.left { left: 0; }
+.story-tap.right { right: 0; }
+
+
+/* ================= STORIES BUTTONS ================= */
+
+.stories-buttons {
+    display: flex;
+    gap: 18px;
+    padding: 20px 10px;
+    justify-content: center;
+}
+
+.story-btn {
+    width: 150px;
+    height: 150px;              /* делаем квадрат */
+    border-radius: 18px;       /* закруглённые углы */
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    padding: 4px;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.story-btn:hover {
+    transform: scale(1.1);                  /* лёгкое увеличение при наведении */
+    box-shadow: 0 8px 20px rgba(182, 123, 255, 0.5);
+}
+
+.story-btn span {
+    width: 100%;
+    height: 100%;
+    background: #0a0a0f;
+    border-radius: 14px;       /* чуть меньше, чем у контейнера */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.story-tap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    z-index: 5;
+}
+
+.story-tap.left { left: 0; }
+.story-tap.right { right: 0; }
+
+
+/* ============================= */
+/*     TELEGRAM WEBAPP ONLY      */
+/* ============================= */
+
+@media (max-width: 480px) {
+
+    /* Telegram-safe viewport */
+    body {
+        font-size: 15px;
+        overscroll-behavior: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    #screen1 {
+        padding: 14px 12px;
+        padding-bottom: 110px; /* под системные кнопки TG */
+    }
+
+    /* Заголовки */
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 26px 0 18px 0;
+    }
+
+    #companyName {
+        font-size: 26px;
+    }
+
+    #companyDesc {
+        font-size: 14.5px;
+        padding: 16px;
+    }
+
+    /* Инфо-блоки */
+    .info-block {
+        padding: 16px;
+        margin: 20px 0;
+    }
+
+    .info-block p {
+        font-size: 14px;
+        padding: 14px 14px 14px 18px;
+    }
+
+    /* ===================== */
+    /*       ТАРИФЫ          */
+    /* ===================== */
+
+    .tariff-title {
+        font-size: 22px;
+    }
+
+    .tariff-card {
+        padding: 16px;
+    }
+
+    .tariff-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .tariff-card h3 {
+        font-size: 17px;
+    }
+
+    .price {
+        font-size: 15px;
+        padding: 8px 14px;
+    }
+
+    .tariff-card p {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    /* Отключаем hover в Telegram */
+    .tariff-card:hover,
+    .info-block p:hover,
+    .option-item:hover,
+    .story-btn:hover,
+    .btn:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* ===================== */
+    /*        MODAL          */
+    /* ===================== */
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        padding: 18px 14px;
+        border-radius: 22px;
+        max-height: 90svh; /* ВАЖНО для TG */
+    }
+
+    #modalTitle {
+        font-size: 22px;
+    }
+
+    #modalDesc {
+        font-size: 14px;
+        padding: 16px;
+    }
+
+    .modal-close {
+        top: 12px;
+        left: 12px;
+    }
+
+    /* ===================== */
+    /*        FORMS          */
+    /* ===================== */
+
+    input,
+    textarea {
+        font-size: 15px;
+        padding: 14px 16px;
+    }
+
+    textarea {
+        min-height: 90px;
+    }
+
+    .extra-options {
+        padding: 16px;
+    }
+
+    .option-item {
+        padding: 12px;
+        gap: 12px;
+        font-size: 14px;
+    }
+
+    /* ===================== */
+    /*        PRICE          */
+    /* ===================== */
+
+    .price-display {
+        font-size: 20px;
+        padding: 18px;
+    }
+
+    /* ===================== */
+    /*       BUTTONS         */
+    /* ===================== */
+
+    .btn {
+        width: 100%;
+        font-size: 16px;
+        padding: 16px;
+        margin-top: 22px;
+    }
+
+    /* ===================== */
+    /*      NOTIFICATION     */
+    /* ===================== */
+
+    .message {
+        width: calc(100% - 32px);
+        font-size: 14px;
+        padding: 14px 18px;
+        bottom: 16px;
+    }
+
+    /* ============================= */
+    /*   TELEGRAM STORIES WINDOW     */
+    /* ============================= */
+
+    @media (max-width: 480px) {
+
+        .stories {
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .stories-window {
+            height: 78svh;          /* НЕ fullscreen */
+            max-width: 420px;
+            width: calc(100% - 32px);
+            border-radius: 24px;
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.6),
+                0 0 40px rgba(182,123,255,.15);
+        }
+
+        .stories-progress {
+            padding: 12px;
+        }
+
+        .story-content {
+            padding: 26px;
+        }
+
+        #storyText {
+            font-size: 18px;
+        }
+
+        /* тап-зоны оставляем фулл */
+        .story-tap {
+            top: 0;
+            bottom: 0;
+        }
+    }
 }
