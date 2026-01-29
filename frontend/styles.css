@@ -908,7 +908,7 @@ textarea {
     width: 64px;
     height: 64px;
 
-    border-radius: 14px; /* закруглённые углы */
+    border-radius: 14px;
 
     background: linear-gradient(135deg, #b67bff, #8a2be2);
     padding: 3px;
@@ -940,14 +940,14 @@ textarea {
 
 
 .story-btn:hover {
-    transform: scale(1.1);                  /* лёгкое увеличение при наведении */
+    transform: scale(1.1);
 }
 
 .story-btn span {
     width: 100%;
     height: 100%;
     background: #0a0a0f;
-    border-radius: 14px;       /* чуть меньше, чем у контейнера */
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -983,7 +983,7 @@ textarea {
 
     #screen1 {
         padding: 14px 12px;
-        padding-bottom: 110px; /* под системные кнопки TG */
+        padding-bottom: 110px;
     }
 
     /* Заголовки */
@@ -1069,7 +1069,7 @@ textarea {
     .modal-content {
         padding: 18px 14px;
         border-radius: 22px;
-        max-height: 90svh; /* ВАЖНО для TG */
+        max-height: 90svh;
     }
 
     #modalTitle {
@@ -1153,7 +1153,7 @@ textarea {
         }
 
         .stories-window {
-            height: 78svh;          /* НЕ fullscreen */
+            height: 78svh;
             max-width: 420px;
             width: calc(100% - 32px);
             border-radius: 24px;
