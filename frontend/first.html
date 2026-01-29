@@ -12,9 +12,16 @@
 <!-- Главная страница -->
 <div id="screen1" class="page active">
 
+    <header id="appHeader">
+        <h1 id="companyName">L-DEV Tech</h1>
+    </header>
+
+
                 <!-- STORIES -->
     <div id="storiesOverlay" class="stories hidden">
         <div class="stories-window">
+
+            <div class="modal-close" onclick="closeStories()">✖</div>
 
             <div class="stories-progress"></div>
 
@@ -32,19 +39,23 @@
         <!-- STORIES BUTTONS -->
     <div class="stories-buttons">
         <div class="story-btn" onclick="openStoryGroup(0)">
-            <span>1</span>
+            <div class="story-icon">1</div>
+            <div class="story-label">Где полезно?</div>
         </div>
+
         <div class="story-btn" onclick="openStoryGroup(1)">
-            <span>2</span>
+            <div class="story-icon">2</div>
+            <div class="story-label">Почему mini-app?</div>
         </div>
+
         <div class="story-btn" onclick="openStoryGroup(2)">
-            <span>3</span>
+            <div class="story-icon">3</div>
+            <div class="story-label">Наш процесс работы</div>
         </div>
     </div>
 
-    <div style="text-align:center; margin-top:40px;">
-        <h1 id="companyName">Telegram Mini App</h1>
 
+    <div style="text-align:center; margin-top:40px;">
         <p id="companyDesc">Создаём удобные и функциональные приложения внутри Telegram для бизнеса и личных целей.</p>
     </div>
 

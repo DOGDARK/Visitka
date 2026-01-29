@@ -68,16 +68,34 @@ h3 {
 }
 
 /* Блок описания компании */
+#appHeader {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: transparent;
+    text-align: center;
+
+    padding: 12px 16px;
+}
+
+
 #companyName {
-    font-size: 40px;
-    margin-top: 10px;
+    margin: 0;
+
+    font-weight: 800;
+    letter-spacing: -0.5px;
+
+    font-size: clamp(22px, 6vw, 36px);
+
     background: linear-gradient(135deg, #b67bff, #8a2be2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-weight: 800;
-    letter-spacing: -1px;
+
+    line-height: 1.1;
 }
+
 
 #companyDesc {
     font-size: 17px;
@@ -870,24 +888,59 @@ textarea {
 
 .stories-buttons {
     display: flex;
-    gap: 18px;
-    padding: 20px 10px;
+    gap: 16px;
+    padding: 16px 12px;
     justify-content: center;
 }
 
+
 .story-btn {
-    width: 150px;
-    height: 150px;              /* делаем квадрат */
-    border-radius: 18px;       /* закруглённые углы */
-    background: linear-gradient(135deg, #b67bff, #8a2be2);
-    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
     cursor: pointer;
-    transition: transform .2s, box-shadow .2s;
+    user-select: none;
 }
+
+.story-icon {
+    width: 64px;
+    height: 64px;
+
+    border-radius: 14px; /* закруглённые углы */
+
+    background: linear-gradient(135deg, #b67bff, #8a2be2);
+    padding: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+
+    box-shadow: 0 4px 12px rgba(182, 123, 255, 0.45);
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+.story-label {
+    font-size: 12px;
+    opacity: 0.85;
+    text-align: center;
+    line-height: 1.2;
+
+    max-width: 72px;
+    word-break: break-word;
+}
+
 
 .story-btn:hover {
     transform: scale(1.1);                  /* лёгкое увеличение при наведении */
-    box-shadow: 0 8px 20px rgba(182, 123, 255, 0.5);
 }
 
 .story-btn span {
@@ -908,7 +961,7 @@ textarea {
     top: 0;
     bottom: 0;
     width: 50%;
-    z-index: 5;
+    z-index: 1;
 }
 
 .story-tap.left { left: 0; }

@@ -291,7 +291,6 @@ function togglePagesInput() {
 const STORIES = [
     // ===== СТОРИС 1: СФЕРЫ =====
     [
-        "В каких сферах может быть полезно мини-приложение",
 
         "Личный бренд\n\nИдеальная цифровая визитка:\nконтакты, ссылки,\nпортфолио, услуги —\nвсё в одном месте.",
 
@@ -316,7 +315,6 @@ const STORIES = [
 
     // ===== СТОРИС 2: ПОЧЕМУ МИНИ-ПРИЛОЖЕНИЕ =====
     [
-        "Почему именно мини-приложение,\nа не бот",
 
         "Приятный визуальный интерфейс\n\nНе сообщения,\nа полноценные страницы,\nкарточки и кнопки.\n\nКак мини-сайт\nв Telegram.",
 
@@ -329,7 +327,6 @@ const STORIES = [
 
     // ===== СТОРИС 3: ПРОЦЕСС РАБОТЫ =====
     [
-        "Наш процесс работы",
 
         "1. Обсуждаем задачу\n\nСозваниваемся,\nобсуждаем нюансы\nи формируем\nидею проекта.",
 
@@ -545,3 +542,24 @@ function resetAndAnimateProgress() {
 }
 
 
+// Перехватываем кнопку "назад" Android в Telegram WebApp
+Telegram.WebApp.onEvent('back_button_pressed', () => {
+    // 1️⃣ Если открыто модальное окно тарифа
+    const tariffModal = document.getElementById('tariffModal');
+    if (tariffModal.classList.contains('active')) {
+        closeTariffModal();
+        return;
+    }
+
+    // 2️⃣ Если открыты сторис
+    if (!overlay.classList.contains('hidden')) {
+        closeStories();
+        return;
+    }
+
+    // 3️⃣ Если на главной странице — закрываем миниапп
+    const mainScreen = document.getElementById('screen1');
+    if (mainScreen.classList.contains('active')) {
+        Telegram.WebApp.close(); // Закрываем миниапп
+    }
+});
