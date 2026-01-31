@@ -2,7 +2,6 @@ import logging
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -40,6 +39,4 @@ app.add_middleware(
 )
 
 # if __name__ == "__main__":
-    # uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
+# uvicorn.run(app, host="0.0.0.0", port=8000)

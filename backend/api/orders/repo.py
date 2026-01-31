@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from backend.api.orders.models import Order
 
 
-class Repo:
+class OrderRepo:
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
 

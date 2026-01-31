@@ -1,5 +1,5 @@
 [tool.ruff]
-line-length = 120
+line-length = 100
 lint.extend-select = ["I"]
 lint.select = ["E", "F", "ANN"]
 lint.ignore = ["ANN401"]

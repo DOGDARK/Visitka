@@ -5,15 +5,15 @@ from urllib.parse import parse_qs, unquote
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
 
-from backend.api.orders.repo import Repo
+from backend.api.orders.repo import OrderRepo
 from backend.api.orders.schemas import OrderRequest, OrderResponse
-from backend.api.users.repo import Repo as UserRepo
+from backend.api.users.service import UserService
 
 
-class Service:
-    def __init__(self, repo: Repo, user_repo: UserRepo) -> None:
+class OrderService:
+    def __init__(self, repo: OrderRepo, user_service: UserService) -> None:
         self._repo = repo
-        self._user_repo = user_repo
+        self._user_service = user_service
 
     async def create_order(self, order_data: OrderRequest) -> OrderResponse:
         data = order_data.model_dump(by_alias=True)
@@ -21,9 +21,7 @@ class Service:
 
         parsed = self._parse_init_data(init_data)
         tg_user_id = parsed.get("user", {}).get("id")
-        user = await self._user_repo.get_user_by_tg_id(tg_user_id)
-        if not user:
-            raise HTTPException(status_code=400, detail="User not found")
+        user = await self._user_service.get_user_by_tg_id(tg_user_id)
 
         data["user_id"] = user.id
 

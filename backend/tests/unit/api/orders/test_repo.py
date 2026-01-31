@@ -1,7 +1,7 @@
 import pytest
 import pytest_asyncio
 from backend.api.orders.models import Order
-from backend.api.orders.repo import Repo
+from backend.api.orders.repo import OrderRepo
 from sqlalchemy import select
 
 from backend.api.users.models import User
@@ -9,7 +9,7 @@ from backend.api.users.models import User
 
 @pytest.fixture()
 def test_repo(test_session):
-    return Repo(test_session)
+    return OrderRepo(test_session)
 
 @pytest_asyncio.fixture()
 async def test_user(test_session):

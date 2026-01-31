@@ -16,7 +16,13 @@ WEBAPP_URL = os.getenv("WEBAPP_URL")
 @dp.message(CommandStart())
 async def start(message: types.Message) -> None:
     keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[[InlineKeyboardButton(text="Открыть мини-приложение", web_app=WebAppInfo(url=WEBAPP_URL))]]
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Открыть мини-приложение", web_app=WebAppInfo(url=WEBAPP_URL)
+                )
+            ]
+        ]
     )
     await message.answer("Привет", reply_markup=keyboard)
 

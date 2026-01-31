@@ -1,5 +1,5 @@
 import pytest
-from backend.api.orders.service import Service
+from backend.api.orders.service import OrderService
 from unittest.mock import AsyncMock, MagicMock
 from backend.api.orders.schemas import OrderResponse, OrderRequest
 
@@ -13,7 +13,7 @@ def mock_user_repo():
 
 @pytest.fixture
 def service(mock_repo, mock_user_repo):
-    return Service(mock_repo, mock_user_repo)
+    return OrderService(mock_repo, mock_user_repo)
 
 @pytest.mark.asyncio
 async def test_create_order(mock_repo, mock_user_repo, service):

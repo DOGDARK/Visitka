@@ -5,12 +5,12 @@ from urllib.parse import parse_qs, unquote
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
 
-from backend.api.users.repo import Repo
+from backend.api.users.repo import UserRepo
 from backend.api.users.schemas import UserRequest, UserResponse
 
 
-class Service:
-    def __init__(self, repo: Repo) -> None:
+class UserService:
+    def __init__(self, repo: UserRepo) -> None:
         self._repo = repo
 
     async def save_user(self, user_data: UserRequest) -> UserResponse:

@@ -27,4 +27,6 @@ class Order(Base):
     pages_enabled: Mapped[bool] = mapped_column(Boolean, default=False)
     pages_count: Mapped[int] = mapped_column(Integer, nullable=True)
     final_price: Mapped[int] = mapped_column(Integer, nullable=False)
-    order_status: Mapped[OrderStatus] = mapped_column(SQLEnum(OrderStatus), nullable=False, default=OrderStatus.NEW)
+    order_status: Mapped[OrderStatus] = mapped_column(
+        SQLEnum(OrderStatus), nullable=False, default=OrderStatus.NEW
+    )
