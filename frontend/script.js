@@ -542,11 +542,13 @@ function resetAndAnimateProgress() {
 }
 
 
-// Перехватываем кнопку "назад" Android в Telegram WebApp
-Telegram.WebApp.onEvent('back_button_pressed', () => {
-    // 1️⃣ Если открыто модальное окно тарифа
+Telegram.WebApp.BackButton.show();
+
+Telegram.WebApp.BackButton.onClick(() => {
+
+    // 1️⃣ Если открыта модалка
     const tariffModal = document.getElementById('tariffModal');
-    if (tariffModal.classList.contains('active')) {
+    if (tariffModal?.classList.contains('active')) {
         closeTariffModal();
         return;
     }
@@ -557,9 +559,7 @@ Telegram.WebApp.onEvent('back_button_pressed', () => {
         return;
     }
 
-    // 3️⃣ Если на главной странице — закрываем миниапп
-    const mainScreen = document.getElementById('screen1');
-    if (mainScreen.classList.contains('active')) {
-        Telegram.WebApp.close(); // Закрываем миниапп
-    }
+    // 3️⃣ ИНАЧЕ — закрываем миниапп
+    Telegram.WebApp.close();
 });
+
