@@ -82,7 +82,7 @@ function sendOrder() {
     const pagesCount = pagesEnabled ? (parseInt(document.getElementById("pagesCount").value) || 0) : 0;
 
     const finalPriceText = document.getElementById("priceDisplay").textContent;
-    const finalPrice = parseInt(finalPriceText.replace(/\D/g, ""));
+    const final_price = parseInt(finalPriceText.replace(/\D/g, ""));
 
     const initData = window.Telegram.WebApp.initData || "";
 
@@ -99,7 +99,7 @@ function sendOrder() {
         last_name: username || null
     };
 
-    fetch("https://l-dev.tech/api/users", {
+    fetch("/api/users", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload_user)
@@ -115,14 +115,14 @@ function sendOrder() {
         payment,
         pagesEnabled,
         pagesCount,
-        finalPrice,
+        final_price,
         init_data: initData
     };
 
     console.log("Отправка:", payload_order);
 
     // отправляем в бэк
-    fetch("https://l-dev.tech/api/orders", {
+    fetch("/api/orders", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload_order)
@@ -156,7 +156,7 @@ function closeTariffModal() {
     const pagesCount = pagesEnabled ? (parseInt(document.getElementById("pagesCount").value) || 0) : 0;
 
     const finalPriceText = document.getElementById("priceDisplay").textContent;
-    const finalPrice = parseInt(finalPriceText.replace(/\D/g, ""));
+    const final_price = parseInt(finalPriceText.replace(/\D/g, ""));
 
     // initData от Telegram WebApp
     const initData = window.Telegram.WebApp.initData || "";
@@ -174,7 +174,7 @@ function closeTariffModal() {
         last_name: username || null
         };
 
-        fetch("https://l-dev.tech/api/users", {
+        fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload_user)
@@ -191,11 +191,11 @@ function closeTariffModal() {
             payment,
             pagesEnabled,
             pagesCount,
-            finalPrice,
+            final_price,
             init_data: initData
         };
 
-        fetch("https://l-dev.tech/api/orders", {
+        fetch("/api/orders", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload_order)

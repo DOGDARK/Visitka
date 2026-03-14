@@ -18,8 +18,8 @@ class OrderResponse(BaseModel):
     tariff: str 
     db: bool = False
     payment: bool = False
-    pages_nabled: bool = False
-    pages_ount: int | None = None
+    pages_enabled: bool = False
+    pages_сount: int | None = None
     final_price: int 
     order_status: str | None = None
 
